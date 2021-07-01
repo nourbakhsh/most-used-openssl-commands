@@ -9,11 +9,11 @@ A list of most used Openssl Commands
 <!-- vscode-markdown-toc -->
 * 1. [Table of Content](#TableofContent)
 * 2. [Information](#Information)
-		* 2.1. [1.Get OpenSSL Version](#GetOpenSSLVersion)
+		* 2.1. [Get OpenSSL Version](#GetOpenSSLVersion)
 * 3. [Generating](#Generating)
 	* 3.1. [Blub](#Blub)
-		* 3.1.1. [1. Generate new private key](#Generatenewprivatekey)
-		* 3.1.2. [1. Generate encrypted private key with Password](#GenerateencryptedprivatekeywithPassword)
+		* 3.1.1. [Generate new private key](#Generatenewprivatekey)
+		* 3.1.2. [Generate encrypted private key with Password](#GenerateencryptedprivatekeywithPassword)
 		* 3.1.3. [Generate the public key from private key](#Generatethepublickeyfromprivatekey)
 		* 3.1.4. [Generate a Certificate Singning Request (CSR) for an existing private key](#GenerateaCertificateSingningRequestCSRforanexistingprivatekey)
 		* 3.1.5. [Generate a Self-Signed Certificate](#GenerateaSelf-SignedCertificate)
@@ -44,7 +44,7 @@ A list of most used Openssl Commands
 
 ##  2. <a name='Information'></a>Information
 
-####  2.1. <a name='GetOpenSSLVersion'></a>1.Get OpenSSL Version
+####  2.1. <a name='GetOpenSSLVersion'></a> Get OpenSSL Version
 
 ```shellscript
 openssl version
@@ -54,7 +54,7 @@ openssl version
 
 ###  3.1. <a name='Blub'></a>Blub 
 
-####  3.1.1. <a name='Generatenewprivatekey'></a>1. Generate new private key
+####  3.1.1. <a name='Generatenewprivatekey'></a> Generate new private key
 
 ```shellscript
 openssl genrsa -out private-key.pem 4096
@@ -75,7 +75,7 @@ ZcPvlZe7LgS+cFj/mzzS+qpOEhsdm1KhDTemm5nmv2xEXmBKun5XFIxo9u+2oOvZ
 ```
 
 
-####  3.1.2. <a name='GenerateencryptedprivatekeywithPassword'></a>1. Generate encrypted private key with Password
+####  3.1.2. <a name='GenerateencryptedprivatekeywithPassword'></a> Generate encrypted private key with Password
 
 ```shellscript
 openssl genrsa -aes256 -out private-key.pem 4096
