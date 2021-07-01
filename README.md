@@ -29,11 +29,6 @@ A list of most used Openssl Commands
 		* 4.4. [Convert public key](#Convertpublickey)
 		* 4.5. [foo](#foo)
 		* 4.6. [foo](#foo-1)
-		* 4.7. [foo](#foo-1)
-		* 4.8. [foo](#foo-1)
-		* 4.9. [foo](#foo-1)
-		* 4.10. [foo](#foo-1)
-		* 4.11. [foo](#foo-1)
 * 5. [Validating](#Validating)
 		* 5.1. [foo](#foo-1)
 
