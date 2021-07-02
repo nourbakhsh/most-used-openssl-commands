@@ -2,12 +2,12 @@
 
 A list of most used Openssl Commands
 
-- Ich bin davon genervt jedes mal nach einem openssl Befehl zu Suchen. Hier eine Sammlung der häufigsten verwendeten Befehle
+<!--- Ich bin davon genervt jedes mal nach einem openssl Befehl zu Suchen. Hier eine Sammlung der häufigsten verwendeten Befehle
 - Alle getestet
 - Bonus link zu OPENSSL Manual
 - Input Feld hinzufügen
 - Für jeden Befehl die Eingabe und Ausgabe Felder kommentieren
-
+-->
 <!-- vscode-markdown-toc -->
 * 1. [Table of Content](#TableofContent)
 * 2. [Information](#Information)
@@ -40,6 +40,25 @@ A list of most used Openssl Commands
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
+<!-- Input Template
+#### foo
+
+```shellscript
+bar
+```
+*Input:*
+```shellscript
+bar
+```
+
+*Output:*
+
+```shellscript
+bar
+```
+!-->
+
+
 ##  1. <a name='TableofContent'></a>Table of Content
 
 
@@ -52,6 +71,27 @@ A list of most used Openssl Commands
 
 ```shellscript
 openssl version
+```
+
+#### GET OCSP Adress from certificate
+
+```shellscript
+openssl x509 -noout -ocsp_uri -in github-com.crt
+```
+*Input:*
+```shellscript
+-----BEGIN CERTIFICATE-----
+MIIFBjCCBK2gAwIBAgIQDovzdw2S0Zbwu2H5PEFmvjAKBggqhkjOPQQDAjBnMQsw
+CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xPzA9BgNVBAMTNkRp
+Z2lDZXJ0IEhpZ2ggQXNzdXJhbmNlIFRMUyBIeWJyaWQgRUNDIFNIQTI1NiAyMDIw
+...
+-----END CERTIFICATE-----
+```
+
+*Output:*
+
+```shellscript
+http://ocsp.digicert.com
 ```
 
 ##  3. <a name='Generating'></a>Generating
@@ -214,88 +254,363 @@ CgwTRGVmYXVsdCBDb21wYW55IEx0ZDEOMAwGA1UEAwwFSGVsbG8wHhcNMjEwNzAx
 -----END CERTIFICATE-----
 ```
 
-####  4.3. <a name='ConvertaPKCS12file.pfx.p12includingtheprivatekeyandcertificatetoPEM'></a>Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to PEM
-
+####  Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **encrypted** PEM
 ```shellscript
-openssl pkcs12 -in keyStore.p12 -out keyStore.pem -nodes
+openssl pkcs12 -in mycontainer.p12 -out keyStore.pem
 ```
 
 *Output:*
 
 ```shellscript
-bar
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+subject=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+issuer=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+-----BEGIN CERTIFICATE-----
+MIIFazCCA1OgAwIBAgIURZdcNOt396gxUYEWeWS7NXGrGeswDQYJKoZIhvcNAQEL
+BQAwRTELMAkGA1UEBhMCREUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMTA3MDIxNDExMThaFw0yMjA3
+...
+-----END CERTIFICATE-----
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+Key Attributes: <No Attributes>
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+MIIJnDBOBgkqhkiG9w0BBQ0wQTApBgkqhkiG9w0BBQwwHAQIllxy3lyvHUsCAggA
+MAwGCCqGSIb3DQIJBQAwFAYIKoZIhvcNAwcECM9EzWTCWm0aBIIJSO9oB86osKEC
+3pMP/L8wivg1531Vnz/t1WXWz3F6Ezs5q2j3IRVVep+h1ASQbG/5sXDqfQR1GkUj
+...
+-----END ENCRYPTED PRIVATE KEY-----
 ```
 
-####  4.4. <a name='Convertpublickey'></a>Convert public key
+####  Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **unencrypted** PEM
 
 ```shellscript
-bar
+openssl pkcs12 -in mycontainer.p12 -out keyStore.pem -nodes
 ```
 
 *Output:*
 
 ```shellscript
-bar
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+subject=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+issuer=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+-----BEGIN CERTIFICATE-----
+MIIFazCCA1OgAwIBAgIURZdcNOt396gxUYEWeWS7NXGrGeswDQYJKoZIhvcNAQEL
+BQAwRTELMAkGA1UEBhMCREUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMTA3MDIxNDExMThaFw0yMjA3
+...
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+Key Attributes: <No Attributes>
+-----BEGIN PRIVATE KEY-----
+MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQCzRzFB1RuUCmrV
+9jK7wUMvWxmFQjq7+MAjO+WFKimcMzyGhiT4NiE25jJP06L1iWS0cBqpKvtysXc+
+ttSBXPHjkBQ+ak79mNlrfvzm9h7wsS7Uciny4DSUSylY/pYMqE3DvBjVMTyLC6zI
+...
+-----END PRIVATE KEY-----
 ```
 
-####  4.5. <a name='foo'></a>foo
+####  Export only private key + client certificate (not CA certificates). from a PKCS#12 file (.pfx .p12) 
 
 ```shellscript
-bar
+openssl pkcs12 -in mycontainer.p12 -clcerts -out file.pem -nodes
 ```
 
 *Output:*
 
 ```shellscript
-bar
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+subject=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+issuer=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+-----BEGIN CERTIFICATE-----
+MIIFazCCA1OgAwIBAgIURZdcNOt396gxUYEWeWS7NXGrGeswDQYJKoZIhvcNAQEL
+BQAwRTELMAkGA1UEBhMCREUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMTA3MDIxNDExMThaFw0yMjA3
+...
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+Key Attributes: <No Attributes>
+-----BEGIN PRIVATE KEY-----
+MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQCzRzFB1RuUCmrV
+9jK7wUMvWxmFQjq7+MAjO+WFKimcMzyGhiT4NiE25jJP06L1iWS0cBqpKvtysXc+
+ttSBXPHjkBQ+ak79mNlrfvzm9h7wsS7Uciny4DSUSylY/pYMqE3DvBjVMTyLC6zI
+...
+-----END PRIVATE KEY-----
 ```
+
+#### Export only client certificate from a PKCS#12 file (.pfx .p12) 
+
+```shellscript
+openssl pkcs12 -in mycontainer.p12 -nokeys -out file.pem -nodes
+```
+
+*Output:*
+
+```shellscript
+Bag Attributes
+    friendlyName: mycert
+    localKeyID: 32 FA B3 80 22 13 3D A3 9D 08 11 8A B2 7E 7A 9C 6D 0C DB 26
+subject=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+issuer=C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+
+-----BEGIN CERTIFICATE-----
+MIIFazCCA1OgAwIBAgIURZdcNOt396gxUYEWeWS7NXGrGeswDQYJKoZIhvcNAQEL
+BQAwRTELMAkGA1UEBhMCREUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMTA3MDIxNDExMThaFw0yMjA3
+...
+```
+
+
+##  5. <a name='Validating'></a>Validating
+<!--
+@TODO
+- Validate CRT with CA certificate
+- Validate CRT with OCSP request
+- Validate CRT with CRL request
+-->
+#### Verify a Certificate Signing Request (CSR)
+
+```shellscript
+openssl req -text -verify -in my-csr.csr -noout
+```
+
+*Output:*
+
+```shellscript
+verify OK
+Certificate Request:
+    Data:
+        Version: 1 (0x0)
+        Subject: C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (4096 bit)
+                Modulus:
+                    00:b3:47:31:41:d5:1b:94:0a:6a:d5:f6:32:bb:c1:
+....
+```
+
+#### Verify a private key
+
+```shellscript
+openssl rsa -in private-key.pem -check -noout
+```
+
+*Output:*
+
+```shellscript
+RSA key ok
+```
+
+#### Verify a certificate
+
+```shellscript
+openssl x509 -in mycertificate.crt -text -noout
+```
+
+*Output:*
+
+```shellscript
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            45:97:5c:34:eb:77:f7:a8:31:51:81:16:79:64:bb:35:71:ab:19:eb
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+        Validity
+            Not Before: Jul  2 14:11:18 2021 GMT
+            Not After : Jul  2 14:11:18 2022 GMT
+        Subject: C = DE, ST = Some-State, O = Internet Widgits Pty Ltd
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (4096 bit)
+                Modulus:
+                    00:b3:47:31:41:d5:1b:94:0a:6a:d5:f6:32:bb:c1:
+...
+```
+
+#### Check a PKCS#12 (.pfx, .p12) file
+
+```shellscript
+openssl pkcs12 -info -in mycontainer.p12
+```
+
+*Output:*
+
+```shellscript
+MAC: sha1, Iteration 2048
+MAC length: 20, salt length: 8
+PKCS7 Encrypted data: pbeWithSHA1And40BitRC2-CBC, Iteration 2048
+Certificate bag
+PKCS7 Data
+Shrouded Keybag: pbeWithSHA1And3-KeyTripleDES-CBC, Iteration 2048
+```
+
+#### Verify if private key / public key / certificate / certificate request matches
+
+```shellscript
+openssl rsa -noout -modulus -in private-key.pem | openssl md5       #MD5 of private key
+
+openssl rsa -noout -modulus -pubin -in public-key.pem | openssl md5 #MD5 of public key
+
+openssl x509 -noout -modulus -in mycertificate.crt | openssl md5    #MD5 of certificate
+
+openssl req -noout -modulus -in my-csr.csr | openssl md5		    #MD5 of certificate signing request .csr
+
+```
+
+*Output:*
+
+```shellscript
+(stdin)= c0976d5a10463452c539ea2ff0c4c166
+
+(stdin)= c0976d5a10463452c539ea2ff0c4c166
+
+(stdin)= c0976d5a10463452c539ea2ff0c4c166
+
+(stdin)= c0976d5a10463452c539ea2ff0c4c166
+```
+
+## TLS Checks
 
 ####  4.6. <a name='foo-1'></a>foo
 
 ```shellscript
-bar
+openssl s_client -connect github.com:443
 ```
 
 *Output:*
 
 ```shellscript
-bar
+CONNECTED(00000003)
+depth=2 C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert High Assurance EV Root CA
+verify return:1
+depth=1 C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+verify return:1
+depth=0 C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+verify return:1
+---
+Certificate chain
+ 0 s:C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+   i:C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+ 1 s:C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+   i:C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert High Assurance EV Root CA
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFBjCCBK2gAwIBAgIQDovzdw2S0Zbwu2H5PEFmvjAKBggqhkjOPQQDAjBnMQsw
+CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xPzA9BgNVBAMTNkRp
+Z2lDZXJ0IEhpZ2ggQXNzdXJhbmNlIFRMUyBIeWJyaWQgRUNDIFNIQTI1NiAyMDIw
+...
+-----END CERTIFICATE-----
+subject=C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+
+issuer=C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: ECDSA
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 2709 bytes and written 366 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_128_GCM_SHA256
+Server public key is 256 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : TLS_AES_128_GCM_SHA256
+    Session-ID: D2D63C36E461B88D457C4EEC6D28C7034B036883A95C6B3F16F90FAC3BB84348
+    Session-ID-ctx:
+    Resumption PSK: 7E5EFE2B4AFC07C8A6434159539BBD3F2A05F6465E2E2FF90012EFC80C9D9CE8
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - 36 4f e4 40 76 15 d7 56-ab 28 10 4f 7d 52 77 72   6O.@v..V.(.O}Rwr
+    0010 - 78 02 e8 cc 6c 60 3d ee-87 27 c3 c5 36 93 f9 da   x...l`=..'..6...
+
+    Start Time: 1625237698
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: no
+    Max Early Data: 0
+---
+read R BLOCK
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : TLS_AES_128_GCM_SHA256
+    Session-ID: 47B48F9A66F777DE35CD6C350744C5F1A4505C0055D3193BA8E6FE37671F8E44
+    Session-ID-ctx:
+    Resumption PSK: D5F3EBBF7FDDB0FF3BE2C0110407B7E3165154729D06D5AFE6476B2CC70AECB5
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - 8b 03 4b ce 8d 26 49 f1-0b 98 e8 01 28 88 90 bb   ..K..&I.....(...
+    0010 - 71 42 85 b7 6c 64 8b 0f-a4 4f 6d da 3e 8d c5 e9   qB..ld...Om.>...
+
+    Start Time: 1625237698
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: no
+    Max Early Data: 0
+---
+read R BLOCK
+closed
 ```
 
-####  4.7. <a name='foo-1'></a>foo
+####  Check TLS connection with custom Certificate Authority
 
 ```shellscript
-bar
+openssl s_client -connect github.com:443 -CAfile CA.crt
 ```
 
-*Output:*
+####  Connect HTTPS Only with TLS 1, 1.1, 1.2, 1.3
 
 ```shellscript
-bar
+openssl s_client -connect github.com:443 -tls1
+openssl s_client -connect github.com:443 -tls1_1
+openssl s_client -connect github.com:443 -tls1_2
+openssl s_client -connect github.com:443 -tls1_3
 ```
 
-####  4.8. <a name='foo-1'></a>foo
+####  Connect HTTPS in debug mode
+
 
 ```shellscript
-bar
-```
-
-*Output:*
-
-```shellscript
-bar
-```
-
-####  4.9. <a name='foo-1'></a>foo
-
-```shellscript
-bar
-```
-
-*Output:*
-
-```shellscript
-bar
+openssl s_client -connect github.com:443 -tlsextdebug
 ```
 
 ####  4.10. <a name='foo-1'></a>foo
@@ -311,27 +626,6 @@ bar
 ```
 
 ####  4.11. <a name='foo-1'></a>foo
-
-```shellscript
-bar
-```
-
-*Output:*
-
-```shellscript
-bar
-```
-
-##  5. <a name='Validating'></a>Validating
-openssl req -out CSR.csr -pubkey -new -keyout privateKey.key -config .shareopenssl.cmf
-@TODO
-- Validate CSR with public key
-- Validate CSR with private key
-- Validate public Key with private key
-- Validate CRT with private key
-- Validate CRT with CA certificate
-- Validate SSL settings
-####  5.1. <a name='foo-1'></a>foo
 
 ```shellscript
 bar
