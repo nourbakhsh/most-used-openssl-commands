@@ -9,7 +9,6 @@ A list of most used Openssl Commands
 - Für jeden Befehl die Eingabe und Ausgabe Felder kommentieren
 -->
 <!-- vscode-markdown-toc -->
-		* 1. [foo](#foo)
 * 1. [Table of Content](#TableofContent)
 * 2. [Information](#Information)
 		* 2.1. [ Get OpenSSL Version](#GetOpenSSLVersion)
@@ -51,7 +50,7 @@ A list of most used Openssl Commands
 <!-- /vscode-markdown-toc -->
 
 <!-- Input Template
-####  1. <a name='foo'></a>foo
+<!--####  1. <a name='foo'></a>foo
 
 ```shellscript
 bar
