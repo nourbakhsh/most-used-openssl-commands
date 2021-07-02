@@ -3,8 +3,10 @@
 A list of most used Openssl Commands
 
 - Ich bin davon genervt jedes mal nach einem openssl Befehl zu Suchen. Hier eine Sammlung der häufigsten verwendeten Befehle
+- Alle getestet
 - Bonus link zu OPENSSL Manual
-
+- Input Feld hinzufügen
+- Für jeden Befehl die Eingabe und Ausgabe Felder kommentieren
 
 <!-- vscode-markdown-toc -->
 * 1. [Table of Content](#TableofContent)
@@ -42,6 +44,8 @@ A list of most used Openssl Commands
 
 
 
+
+
 ##  2. <a name='Information'></a>Information
 
 ####  2.1. <a name='GetOpenSSLVersion'></a> Get OpenSSL Version
@@ -51,8 +55,6 @@ openssl version
 ```
 
 ##  3. <a name='Generating'></a>Generating
-
-###  3.1. <a name='Blub'></a>Blub 
 
 ####  3.1.1. <a name='Generatenewprivatekey'></a> Generate new private key
 
@@ -147,9 +149,7 @@ CgwTRGVmYXVsdCBDb21wYW55IEx0ZDEOMAwGA1UEAwwFSGVsbG8wHhcNMjEwNzAx
 ```
 
 ####  3.1.6. <a name='CreateaPKCS12.p12.pfxcontainerwithprivatekeyandcertificate'></a>Create a PKCS#12 (.p12, .pfx) container with private key and certificate
-
 `-name`: is the alias of the certificate in .p12 file
-
 ```shellscript
 openssl pkcs12 -export -name mycert -inkey private-key.pem -in mycertificate.crt -out mycontainer.p12
 ```
@@ -157,7 +157,6 @@ openssl pkcs12 -export -name mycert -inkey private-key.pem -in mycertificate.crt
 ####  3.1.7. <a name='CreateaPKCS12.p12.pfxcontainerprivateKeycertificateandCAcertificate'></a>Create a PKCS#12 (.p12, .pfx) container private Key, certificate and CA certificate
 
 `-name` is the alias of the certificate in .p12 file
-
 `-certfile` filename of the CAFile which has signed the certificate. Be aware that the file must be in PEM Format and NOT DER. Check below for a command to convert from DER to PEM
 
 ```shellscript
@@ -325,7 +324,13 @@ bar
 
 ##  5. <a name='Validating'></a>Validating
 openssl req -out CSR.csr -pubkey -new -keyout privateKey.key -config .shareopenssl.cmf
-
+@TODO
+- Validate CSR with public key
+- Validate CSR with private key
+- Validate public Key with private key
+- Validate CRT with private key
+- Validate CRT with CA certificate
+- Validate SSL settings
 ####  5.1. <a name='foo-1'></a>foo
 
 ```shellscript
