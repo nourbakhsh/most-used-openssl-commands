@@ -625,26 +625,3 @@ openssl s_client -connect github.com:443 -tls1_3
 openssl s_client -connect github.com:443 -tlsextdebug
 ```
 
-####  6.5. <a name='foo-1'></a>foo
-
-```shellscript
-bar
-```
-
-*Output:*
-
-```shellscript
-bar
-```
-
-####  6.6. <a name='foo-1'></a>foo
-
-```shellscript
-bar
-```
-
-*Output:*
-
-```shellscript
-bar
-```
