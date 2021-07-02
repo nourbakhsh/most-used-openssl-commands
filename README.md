@@ -11,28 +11,39 @@ A list of most used Openssl Commands
 <!-- vscode-markdown-toc -->
 * 1. [Table of Content](#TableofContent)
 * 2. [Information](#Information)
-		* 2.1. [Get OpenSSL Version](#GetOpenSSLVersion)
+		* 2.1. [ Get OpenSSL Version](#GetOpenSSLVersion)
+		* 2.2. [GET OCSP Adress from certificate](#GETOCSPAdressfromcertificate)
 * 3. [Generating](#Generating)
-	* 3.1. [Blub](#Blub)
-		* 3.1.1. [Generate new private key](#Generatenewprivatekey)
-		* 3.1.2. [Generate encrypted private key with Password](#GenerateencryptedprivatekeywithPassword)
-		* 3.1.3. [Generate the public key from private key](#Generatethepublickeyfromprivatekey)
-		* 3.1.4. [Generate a Certificate Singning Request (CSR) for an existing private key](#GenerateaCertificateSingningRequestCSRforanexistingprivatekey)
-		* 3.1.5. [Generate a Self-Signed Certificate](#GenerateaSelf-SignedCertificate)
-		* 3.1.6. [Create a PKCS#12 (.p12, .pfx) container with private key and certificate](#CreateaPKCS12.p12.pfxcontainerwithprivatekeyandcertificate)
-		* 3.1.7. [Create a PKCS#12 (.p12, .pfx) container private Key, certificate and CA certificate](#CreateaPKCS12.p12.pfxcontainerprivateKeycertificateandCAcertificate)
-		* 3.1.8. [Create a PKCS#12 (.p12, .pfx) container only with private key](#CreateaPKCS12.p12.pfxcontaineronlywithprivatekey)
-		* 3.1.9. [Create a PKCS#12 (.p12, .pfx) container only with certificates](#CreateaPKCS12.p12.pfxcontaineronlywithcertificates)
-		* 3.1.10. [Remove password from a private key](#Removepasswordfromaprivatekey)
+		* 3.1. [ Generate new private key](#Generatenewprivatekey)
+		* 3.2. [ Generate encrypted private key with Password](#GenerateencryptedprivatekeywithPassword)
+		* 3.3. [Generate the public key from private key](#Generatethepublickeyfromprivatekey)
+		* 3.4. [Generate a Certificate Singning Request (CSR) for an existing private key](#GenerateaCertificateSingningRequestCSRforanexistingprivatekey)
+		* 3.5. [Generate a Self-Signed Certificate](#GenerateaSelf-SignedCertificate)
+		* 3.6. [Create a PKCS#12 (.p12, .pfx) container with private key and certificate](#CreateaPKCS12.p12.pfxcontainerwithprivatekeyandcertificate)
+		* 3.7. [Create a PKCS#12 (.p12, .pfx) container private Key, certificate and CA certificate](#CreateaPKCS12.p12.pfxcontainerprivateKeycertificateandCAcertificate)
+		* 3.8. [Create a PKCS#12 (.p12, .pfx) container only with private key](#CreateaPKCS12.p12.pfxcontaineronlywithprivatekey)
+		* 3.9. [Create a PKCS#12 (.p12, .pfx) container only with certificates](#CreateaPKCS12.p12.pfxcontaineronlywithcertificates)
+		* 3.10. [Remove password from a private key](#Removepasswordfromaprivatekey)
 * 4. [Converting](#Converting)
 		* 4.1. [Convert a DER Binary Format (.der, .cer) file to PEM (.crt, .pem, .cer)](#ConvertaDERBinaryFormat.der.cerfiletoPEM.crt.pem.cer)
 		* 4.2. [Convert a PEM (.crt, .pem, .cer) file to DER (.der, .cer)](#ConvertaPEM.crt.pem.cerfiletoDER.der.cer)
-		* 4.3. [Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to PEM](#ConvertaPKCS12file.pfx.p12includingtheprivatekeyandcertificatetoPEM)
-		* 4.4. [Convert public key](#Convertpublickey)
-		* 4.5. [foo](#foo)
-		* 4.6. [foo](#foo-1)
+		* 4.3. [ Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **encrypted** PEM](#ConvertaPKCS12file.pfx.p12includingtheprivatekeyandcertificatetoencryptedPEM)
+		* 4.4. [ Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **unencrypted** PEM](#ConvertaPKCS12file.pfx.p12includingtheprivatekeyandcertificatetounencryptedPEM)
+		* 4.5. [ Export only private key + client certificate (not CA certificates). from a PKCS#12 file (.pfx .p12)](#ExportonlyprivatekeyclientcertificatenotCAcertificates.fromaPKCS12file.pfx.p12)
+		* 4.6. [Export only client certificate from a PKCS#12 file (.pfx .p12)](#ExportonlyclientcertificatefromaPKCS12file.pfx.p12)
 * 5. [Validating](#Validating)
-		* 5.1. [foo](#foo-1)
+		* 5.1. [Verify a Certificate Signing Request (CSR)](#VerifyaCertificateSigningRequestCSR)
+		* 5.2. [Verify a private key](#Verifyaprivatekey)
+		* 5.3. [Verify a certificate](#Verifyacertificate)
+		* 5.4. [Check a PKCS#12 (.pfx, .p12) file](#CheckaPKCS12.pfx.p12file)
+		* 5.5. [Verify if private key / public key / certificate / certificate request matches](#Verifyifprivatekeypublickeycertificatecertificaterequestmatches)
+* 6. [TLS Checks](#TLSChecks)
+		* 6.1. [foo](#foo-1)
+		* 6.2. [ Check TLS connection with custom Certificate Authority](#CheckTLSconnectionwithcustomCertificateAuthority)
+		* 6.3. [ Connect HTTPS Only with TLS 1, 1.1, 1.2, 1.3](#ConnectHTTPSOnlywithTLS11.11.21.3)
+		* 6.4. [ Connect HTTPS in debug mode](#ConnectHTTPSindebugmode)
+		* 6.5. [foo](#foo-1)
+		* 6.6. [foo](#foo-1)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -41,7 +52,7 @@ A list of most used Openssl Commands
 <!-- /vscode-markdown-toc -->
 
 <!-- Input Template
-#### foo
+####  1. <a name='foo'></a>foo
 
 ```shellscript
 bar
@@ -73,7 +84,7 @@ bar
 openssl version
 ```
 
-#### GET OCSP Adress from certificate
+####  2.2. <a name='GETOCSPAdressfromcertificate'></a>GET OCSP Adress from certificate
 
 ```shellscript
 openssl x509 -noout -ocsp_uri -in github-com.crt
@@ -96,7 +107,7 @@ http://ocsp.digicert.com
 
 ##  3. <a name='Generating'></a>Generating
 
-####  3.1.1. <a name='Generatenewprivatekey'></a> Generate new private key
+####  3.1. <a name='Generatenewprivatekey'></a> Generate new private key
 
 ```shellscript
 openssl genrsa -out private-key.pem 4096
@@ -117,7 +128,7 @@ ZcPvlZe7LgS+cFj/mzzS+qpOEhsdm1KhDTemm5nmv2xEXmBKun5XFIxo9u+2oOvZ
 ```
 
 
-####  3.1.2. <a name='GenerateencryptedprivatekeywithPassword'></a> Generate encrypted private key with Password
+####  3.2. <a name='GenerateencryptedprivatekeywithPassword'></a> Generate encrypted private key with Password
 
 ```shellscript
 openssl genrsa -aes256 -out private-key.pem 4096
@@ -137,7 +148,7 @@ XpqcZvV1Fq9puam0ULGkm2APIGIurUCJ/e2UafnXXbEuUhml6wOVpmGZoIaoU/a9
 -----END RSA PRIVATE KEY-----
 ```
 
-####  3.1.3. <a name='Generatethepublickeyfromprivatekey'></a>Generate the public key from private key
+####  3.3. <a name='Generatethepublickeyfromprivatekey'></a>Generate the public key from private key
 
 ```shellscript
 openssl rsa -in private-key.pem -pubout -outform PEM -out public-key.pem
@@ -154,7 +165,7 @@ Gf2WbKkS+1Jivp+GJ5eTXgDUQcG1A52AldycPCk5s2ZXezZnTlKg+yBi5U4SohXp
 -----END PUBLIC KEY-----
 ```
 
-####  3.1.4. <a name='GenerateaCertificateSingningRequestCSRforanexistingprivatekey'></a>Generate a Certificate Singning Request (CSR) for an existing private key
+####  3.4. <a name='GenerateaCertificateSingningRequestCSRforanexistingprivatekey'></a>Generate a Certificate Singning Request (CSR) for an existing private key
 
 ```shellscript
 openssl req -out my-csr.csr -key private-key.pem -new
@@ -171,7 +182,7 @@ BQADggIPADCCAgoCggIBAM9O3cWLpifHoZFogsAV9uUEfPfrLp48rYh6JDaYfwk2
 -----END CERTIFICATE REQUEST-----
 ```
 
-####  3.1.5. <a name='GenerateaSelf-SignedCertificate'></a>Generate a Self-Signed Certificate
+####  3.5. <a name='GenerateaSelf-SignedCertificate'></a>Generate a Self-Signed Certificate
 
 ```shellscript
 openssl req -new -x509 -key private-key.pem -out mycertificate.crt -days 365
@@ -188,24 +199,25 @@ CgwTRGVmYXVsdCBDb21wYW55IEx0ZDEOMAwGA1UEAwwFSGVsbG8wHhcNMjEwNzAx
 -----END CERTIFICATE-----
 ```
 
-####  3.1.6. <a name='CreateaPKCS12.p12.pfxcontainerwithprivatekeyandcertificate'></a>Create a PKCS#12 (.p12, .pfx) container with private key and certificate
-`-name`: is the alias of the certificate in .p12 file
+####  3.6. <a name='CreateaPKCS12.p12.pfxcontainerwithprivatekeyandcertificate'></a>Create a PKCS#12 (.p12, .pfx) container with private key and certificate
+`-name`: is the friendly name (alias) of the certificate in .p12 file
 ```shellscript
 openssl pkcs12 -export -name mycert -inkey private-key.pem -in mycertificate.crt -out mycontainer.p12
 ```
 
-####  3.1.7. <a name='CreateaPKCS12.p12.pfxcontainerprivateKeycertificateandCAcertificate'></a>Create a PKCS#12 (.p12, .pfx) container private Key, certificate and CA certificate
+####  3.7. <a name='CreateaPKCS12.p12.pfxcontainerprivateKeycertificateandCAcertificate'></a>Create a PKCS#12 (.p12, .pfx) container private Key, certificate and CA certificate
 
-`-name` is the alias of the certificate in .p12 file
+`-name` is the friendly name (alias) of the certificate in .p12 file
+
 `-certfile` filename of the CAFile which has signed the certificate. Be aware that the file must be in PEM Format and NOT DER. Check below for a command to convert from DER to PEM
 
 ```shellscript
 openssl pkcs12 -export -name mycert -inkey clientCert-mtls-E2EBankSign.prv.key -in mycertificate.crt -certfile CAFile.pem.crt -out mycontainer.p12
 ```
 
-####  3.1.8. <a name='CreateaPKCS12.p12.pfxcontaineronlywithprivatekey'></a>Create a PKCS#12 (.p12, .pfx) container only with private key
+####  3.8. <a name='CreateaPKCS12.p12.pfxcontaineronlywithprivatekey'></a>Create a PKCS#12 (.p12, .pfx) container only with private key
 
-`-name`: is the alias of the certificate in .p12 file
+`-name`: is the friendly name (alias) of the certificate in .p12 file
 
 `-nocerts`: no certificate is imported to the .p12 file
 
@@ -213,9 +225,9 @@ openssl pkcs12 -export -name mycert -inkey clientCert-mtls-E2EBankSign.prv.key -
 openssl pkcs12 -export -name mykey -nocerts -inkey private-key.pem -out mycontainer.p12
 ```
 
-####  3.1.9. <a name='CreateaPKCS12.p12.pfxcontaineronlywithcertificates'></a>Create a PKCS#12 (.p12, .pfx) container only with certificates
+####  3.9. <a name='CreateaPKCS12.p12.pfxcontaineronlywithcertificates'></a>Create a PKCS#12 (.p12, .pfx) container only with certificates
 
-`-name` is the alias of the certificate in .p12 file
+`-name` is the friendly name (alias) of the certificate in .p12 file
 
 `-nokeys` no private key is imported to the .p12 file
 
@@ -223,7 +235,7 @@ openssl pkcs12 -export -name mykey -nocerts -inkey private-key.pem -out mycontai
 openssl pkcs12 -export  -name mycert -nokeys -in mycertificate.crt -out mycontainer.p12
 ```
 
-####  3.1.10. <a name='Removepasswordfromaprivatekey'></a>Remove password from a private key
+####  3.10. <a name='Removepasswordfromaprivatekey'></a>Remove password from a private key
 
 ```shellscript
 openssl rsa -in private-key.pem -out new-private-key.pem
@@ -254,7 +266,7 @@ CgwTRGVmYXVsdCBDb21wYW55IEx0ZDEOMAwGA1UEAwwFSGVsbG8wHhcNMjEwNzAx
 -----END CERTIFICATE-----
 ```
 
-####  Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **encrypted** PEM
+####  4.3. <a name='ConvertaPKCS12file.pfx.p12includingtheprivatekeyandcertificatetoencryptedPEM'></a> Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **encrypted** PEM
 ```shellscript
 openssl pkcs12 -in mycontainer.p12 -out keyStore.pem
 ```
@@ -287,7 +299,7 @@ MAwGCCqGSIb3DQIJBQAwFAYIKoZIhvcNAwcECM9EzWTCWm0aBIIJSO9oB86osKEC
 -----END ENCRYPTED PRIVATE KEY-----
 ```
 
-####  Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **unencrypted** PEM
+####  4.4. <a name='ConvertaPKCS12file.pfx.p12includingtheprivatekeyandcertificatetounencryptedPEM'></a> Convert a PKCS#12 file (.pfx .p12) including the private key and certificate to **unencrypted** PEM
 
 ```shellscript
 openssl pkcs12 -in mycontainer.p12 -out keyStore.pem -nodes
@@ -320,7 +332,7 @@ ttSBXPHjkBQ+ak79mNlrfvzm9h7wsS7Uciny4DSUSylY/pYMqE3DvBjVMTyLC6zI
 -----END PRIVATE KEY-----
 ```
 
-####  Export only private key + client certificate (not CA certificates). from a PKCS#12 file (.pfx .p12) 
+####  4.5. <a name='ExportonlyprivatekeyclientcertificatenotCAcertificates.fromaPKCS12file.pfx.p12'></a> Export only private key + client certificate (not CA certificates). from a PKCS#12 file (.pfx .p12) 
 
 ```shellscript
 openssl pkcs12 -in mycontainer.p12 -clcerts -out file.pem -nodes
@@ -353,7 +365,7 @@ ttSBXPHjkBQ+ak79mNlrfvzm9h7wsS7Uciny4DSUSylY/pYMqE3DvBjVMTyLC6zI
 -----END PRIVATE KEY-----
 ```
 
-#### Export only client certificate from a PKCS#12 file (.pfx .p12) 
+####  4.6. <a name='ExportonlyclientcertificatefromaPKCS12file.pfx.p12'></a>Export only client certificate from a PKCS#12 file (.pfx .p12) 
 
 ```shellscript
 openssl pkcs12 -in mycontainer.p12 -nokeys -out file.pem -nodes
@@ -384,7 +396,7 @@ GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMTA3MDIxNDExMThaFw0yMjA3
 - Validate CRT with OCSP request
 - Validate CRT with CRL request
 -->
-#### Verify a Certificate Signing Request (CSR)
+####  5.1. <a name='VerifyaCertificateSigningRequestCSR'></a>Verify a Certificate Signing Request (CSR)
 
 ```shellscript
 openssl req -text -verify -in my-csr.csr -noout
@@ -406,7 +418,7 @@ Certificate Request:
 ....
 ```
 
-#### Verify a private key
+####  5.2. <a name='Verifyaprivatekey'></a>Verify a private key
 
 ```shellscript
 openssl rsa -in private-key.pem -check -noout
@@ -418,7 +430,7 @@ openssl rsa -in private-key.pem -check -noout
 RSA key ok
 ```
 
-#### Verify a certificate
+####  5.3. <a name='Verifyacertificate'></a>Verify a certificate
 
 ```shellscript
 openssl x509 -in mycertificate.crt -text -noout
@@ -446,7 +458,7 @@ Certificate:
 ...
 ```
 
-#### Check a PKCS#12 (.pfx, .p12) file
+####  5.4. <a name='CheckaPKCS12.pfx.p12file'></a>Check a PKCS#12 (.pfx, .p12) file
 
 ```shellscript
 openssl pkcs12 -info -in mycontainer.p12
@@ -463,7 +475,7 @@ PKCS7 Data
 Shrouded Keybag: pbeWithSHA1And3-KeyTripleDES-CBC, Iteration 2048
 ```
 
-#### Verify if private key / public key / certificate / certificate request matches
+####  5.5. <a name='Verifyifprivatekeypublickeycertificatecertificaterequestmatches'></a>Verify if private key / public key / certificate / certificate request matches
 
 ```shellscript
 openssl rsa -noout -modulus -in private-key.pem | openssl md5       #MD5 of private key
@@ -488,9 +500,9 @@ openssl req -noout -modulus -in my-csr.csr | openssl md5		    #MD5 of certificat
 (stdin)= c0976d5a10463452c539ea2ff0c4c166
 ```
 
-## TLS Checks
+##  6. <a name='TLSChecks'></a>TLS Checks
 
-####  4.6. <a name='foo-1'></a>foo
+####  Check HTTPS connection with OpenSSL
 
 ```shellscript
 openssl s_client -connect github.com:443
@@ -591,13 +603,13 @@ read R BLOCK
 closed
 ```
 
-####  Check TLS connection with custom Certificate Authority
+####  6.2. <a name='CheckTLSconnectionwithcustomCertificateAuthority'></a> Check TLS connection with custom Certificate Authority
 
 ```shellscript
 openssl s_client -connect github.com:443 -CAfile CA.crt
 ```
 
-####  Connect HTTPS Only with TLS 1, 1.1, 1.2, 1.3
+####  6.3. <a name='ConnectHTTPSOnlywithTLS11.11.21.3'></a> Connect HTTPS Only with TLS 1, 1.1, 1.2, 1.3
 
 ```shellscript
 openssl s_client -connect github.com:443 -tls1
@@ -606,14 +618,14 @@ openssl s_client -connect github.com:443 -tls1_2
 openssl s_client -connect github.com:443 -tls1_3
 ```
 
-####  Connect HTTPS in debug mode
+####  6.4. <a name='ConnectHTTPSindebugmode'></a> Connect HTTPS in debug mode
 
 
 ```shellscript
 openssl s_client -connect github.com:443 -tlsextdebug
 ```
 
-####  4.10. <a name='foo-1'></a>foo
+####  6.5. <a name='foo-1'></a>foo
 
 ```shellscript
 bar
@@ -625,7 +637,7 @@ bar
 bar
 ```
 
-####  4.11. <a name='foo-1'></a>foo
+####  6.6. <a name='foo-1'></a>foo
 
 ```shellscript
 bar
