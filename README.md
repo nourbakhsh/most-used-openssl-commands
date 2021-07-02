@@ -9,6 +9,7 @@ A list of most used Openssl Commands
 - Für jeden Befehl die Eingabe und Ausgabe Felder kommentieren
 -->
 <!-- vscode-markdown-toc -->
+		* 1. [foo](#foo)
 * 1. [Table of Content](#TableofContent)
 * 2. [Information](#Information)
 		* 2.1. [ Get OpenSSL Version](#GetOpenSSLVersion)
@@ -38,12 +39,10 @@ A list of most used Openssl Commands
 		* 5.4. [Check a PKCS#12 (.pfx, .p12) file](#CheckaPKCS12.pfx.p12file)
 		* 5.5. [Verify if private key / public key / certificate / certificate request matches](#Verifyifprivatekeypublickeycertificatecertificaterequestmatches)
 * 6. [TLS Checks](#TLSChecks)
-		* 6.1. [foo](#foo-1)
+		* 6.1. [ Check HTTPS connection with OpenSSL](#CheckHTTPSconnectionwithOpenSSL)
 		* 6.2. [ Check TLS connection with custom Certificate Authority](#CheckTLSconnectionwithcustomCertificateAuthority)
 		* 6.3. [ Connect HTTPS Only with TLS 1, 1.1, 1.2, 1.3](#ConnectHTTPSOnlywithTLS11.11.21.3)
 		* 6.4. [ Connect HTTPS in debug mode](#ConnectHTTPSindebugmode)
-		* 6.5. [foo](#foo-1)
-		* 6.6. [foo](#foo-1)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -502,7 +501,7 @@ openssl req -noout -modulus -in my-csr.csr | openssl md5		    #MD5 of certificat
 
 ##  6. <a name='TLSChecks'></a>TLS Checks
 
-####  Check HTTPS connection with OpenSSL
+####  6.1. <a name='CheckHTTPSconnectionwithOpenSSL'></a> Check HTTPS connection with OpenSSL
 
 ```shellscript
 openssl s_client -connect github.com:443
